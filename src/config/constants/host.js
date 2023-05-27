@@ -1,5 +1,5 @@
 import { getCookie } from '../functions/useCookie';
-export const baseUrl = 'http://localhost:5000';
+export const baseUrl = 'https://itransition-back.herokuapp.com';
 export const TOKEN = 'ITRANSITION_TOKEN';
 const token = getCookie(TOKEN);
 export const headers = {
