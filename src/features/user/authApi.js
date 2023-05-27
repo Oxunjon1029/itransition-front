@@ -23,10 +23,6 @@ export const authApi = createApi({
           url: 'signin',
           method: 'POST',
           body: data,
-          headers: {
-            "Content-type": "application/json; charset=utf-8",
-            "Accept": "application/json"
-          }
         };
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
