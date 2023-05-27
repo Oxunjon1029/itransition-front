@@ -1,56 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import LoginAndRegisteration from './pages/LoginAndRegisteration';
+import UserManagement from './pages/UserManagement'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import Login from './pages/Login';
+import Registeration from './pages/Registeration';
+import { ToastContainer } from 'react-toastify'
+import { getCookie } from './config/functions/useCookie';
+import { TOKEN } from './config/constants/host';
 
+import ProtectedRoute from './components/ProtectedRoute';
+const routes = [
+  {
+    id: 0,
+    path: '/signup',
+    element: <Registeration />,
+  },
+  {
+    id: 1,
+    path: '/signin',
+    element: <Login />
+  }
+]
 function App() {
+  let token = getCookie(TOKEN);
+  const location = useLocation()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <ToastContainer />
+      {
+        location.pathname === '/' &&
+        <Navigate to='/signup' />
+
+      }
+
+      <Routes>
+        <Route path="/" element={<LoginAndRegisteration />} >
+          {routes.map((route) => (
+            <Route path={route.path} key={route.id} element={route.element} />
+          ))}
+        </Route>
+
+
+        <Route path="/users" element={
+          <ProtectedRoute token={token}>
+            <UserManagement />
+          </ProtectedRoute>} />
+      </Routes>
+
+
     </div>
   );
 }
