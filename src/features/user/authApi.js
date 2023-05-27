@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl, headers } from '../../config/constants/host';
+import { baseUrl } from '../../config/constants/host';
 import { setUser } from './userSlice';
 
 export const authApi = createApi({
