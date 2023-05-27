@@ -34,7 +34,6 @@ const Login = () => {
       navigator('/users');
     }
     if (isError) {
-      console.log(error);
       toast.error(error.data?.message);
     }
   }, [isError, isSuccess, error, data, user, navigator, dispatch]);

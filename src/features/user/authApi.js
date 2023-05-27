@@ -29,7 +29,7 @@ export const authApi = createApi({
         try {
           const { data } = await queryFulfilled;
           await dispatch(setUser(data?.user));
-        } catch (error) { }
+        } catch (error) { console.log(error); }
       },
     }),
 
