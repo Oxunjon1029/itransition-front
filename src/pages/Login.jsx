@@ -26,18 +26,22 @@ const Login = () => {
   const handleSubmit = (values) => {
     loginUser(values);
   };
-  
+
   const user = useSelector(selectUser);
   useEffect(() => {
     if (isSuccess) {
       setCookie(TOKEN, data?.token);
-      toast.success('User successfully logged in!');
       navigator('/users');
     }
     if (isError) {
       toast.error(error.data?.message);
     }
   }, [isError, isSuccess, error, data, user, navigator, dispatch]);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(`${data?.user?.name} successfully logged in`);
+    }
+  }, [isSuccess,data]);
   return (
     <Box>
       <Box
