@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '../../config/constants/host';
+import { baseUrl, headers } from '../../config/constants/host';
 import { setUser } from './userSlice';
 
 export const authApi = createApi({
@@ -23,13 +23,14 @@ export const authApi = createApi({
           url: 'signin',
           method: 'POST',
           body: data,
+          headers
         };
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           await dispatch(setUser(data?.user));
-        } catch (error) { console.log(error); }
+        } catch (error) {  }
       },
     }),
 
