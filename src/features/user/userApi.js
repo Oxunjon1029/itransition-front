@@ -12,6 +12,7 @@ export const userApi = createApi({
       query: () => ({
         url: '/users',
         headers,
+        credentials:'include'
       }),
       providesTags: ['User'],
 
@@ -20,6 +21,7 @@ export const userApi = createApi({
       query: (id) => ({
         url: `/users/${id}`,
         headers,
+        credentials:'include'
       })
     }),
     deleteUser: builder.mutation({
@@ -29,6 +31,7 @@ export const userApi = createApi({
           url: `/users/delete`,
           headers,
           method: 'DELETE',
+          credentials:'include',
           body: { selectedIds: ids }
         }
       },
@@ -42,6 +45,7 @@ export const userApi = createApi({
           method: 'PUT',
           headers,
           body: args,
+          credentials:'include'
         }
       },
       
